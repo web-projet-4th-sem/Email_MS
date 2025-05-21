@@ -1,0 +1,22 @@
+.review-section {
+  margin-top: 80px; /* Increased from 40px to 80px */
+}
+
+.download-button,
+.review-button,
+.mark-button {
+  background-color: #001f4d;
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: block;
+}
+
+/* Ensure the Mark button has same styling if needed */
+.mark-button {
+  margin-top: 10px;
+}

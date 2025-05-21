@@ -1,0 +1,26 @@
+.registration-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full height of viewport */
+    background-color: #f1f8fa; /* Light background */
+  }
+  .registration-card {
+    background: #fff; /* White background */
+    padding: 2rem; /* Spacing inside the card */
+    border-radius: 15px; /* Rounded corners */
+    width: 400px; /* Fixed width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for lift effect */
+  }
+
+  /* Center header elements */
+.registration-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Logo image styling */
+.registration-logo {
+  width: 100px; /* Set logo width */
+  margin-bottom: 1rem; /* Space below the logo */
+}

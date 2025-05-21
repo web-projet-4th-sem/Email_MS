@@ -1,0 +1,192 @@
+/* Base dashboard layout from AdminDashboard */
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-sidebar {
+  width: 300px;
+  background-color: #001f4d;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-logo img {
+  width: 100px;
+  margin-bottom: 30px;
+}
+
+.admin-profile {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  width: 100%;
+  gap: 15px;
+}
+
+.admin-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.admin-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-info p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.admin-info span {
+  font-size: 13px;
+  color: #ccc;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+
+.admin-nav button {
+  background: #b3e0ff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 17px;
+  cursor: pointer;
+  text-align: left;
+  padding-left: 20px;
+  transition: background 0.3s;
+}
+
+.admin-nav button:hover {
+  background: #80d4ff;
+}
+
+.admin-main {
+  flex-grow: 1;
+  background-color: #e8f1f2;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+/* Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.admin-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-header-text h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.admin-header-text h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.admin-icons span {
+  font-size: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+/* Table styles */
+.user-table-container {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.custom-user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.custom-user-table th {
+  background-color: #001f4d;
+  color: white;
+  padding: 12px;
+  border-radius: 12px 12px 0 0;
+  text-align: left;
+}
+
+.custom-user-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+.dropdown {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.view-btn {
+  background-color: #b3e0ff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #001f4d;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #001f4d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #006666;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.pagination-btn {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}

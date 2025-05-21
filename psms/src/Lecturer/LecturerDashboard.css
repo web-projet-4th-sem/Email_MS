@@ -1,0 +1,142 @@
+.dashboard {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sidebar {
+  width: 300px;
+  background-color: #001f4d;
+  color: white;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 0px 0px 0;
+  align-items: center;
+}
+
+.logo img {
+  width: 90px;
+  margin-bottom: 20px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  width: 100%;
+  gap: 15px;
+}
+
+.profile .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.profile-info span {
+  font-size: 13px;
+  color: #ccc;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 30px; /* Increased gap between buttons */
+  margin-top: 10px;
+}
+
+.nav-links button {
+  background: #b3e0ff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: left;
+  padding-left: 20px;
+  transition: background 0.3s;
+}
+
+.nav-links button:hover {
+  background: #80d4ff;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  background-color: #e6f7ff;
+  overflow-y: auto;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.main-header .icons {
+  display: flex;
+  gap: 15px;
+  font-size: 20px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.project-card {
+  background-color: #006666;
+  color: white;
+  border-radius: 15px;
+  padding: 25px 15px;
+  text-align: center;
+  height: 160px; /* Increased card height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-card .icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.project-card span {
+  font-size: 12px;
+  color: #d9f2f2;
+}

@@ -1,0 +1,10 @@
+<Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/otp-verification" element={<OtpForm />} />
+        <Route path="/lecturer" element={<LecturerDashboard />} />
+      </Routes>
+    </Router>
+app.js eke login connection ek

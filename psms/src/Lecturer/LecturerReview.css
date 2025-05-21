@@ -1,0 +1,160 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .sidebar {
+    width: 300px;
+    background-color: #001f4d;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0px 0px 0;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 90px;
+    margin-bottom: 20px;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid white;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+    gap: 15px;
+  }
+  
+  .profile .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .profile-info p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .profile-info span {
+    font-size: 13px;
+    color: #ccc;
+  }
+  
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+    margin-top: 10px;
+  }
+  
+  .nav-links button {
+    background: #b3e0ff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: left;
+    padding-left: 20px;
+    transition: background 0.3s;
+  }
+  
+  .nav-links button:hover {
+    background: #80d4ff;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px 40px;
+    background-color: #f5f5f5;
+  }
+  
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .icons .icon {
+    font-size: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  
+  .review-section {
+    margin-top: 40px;
+  }
+  
+  .download-button,
+  .review-button {
+    background-color: #001f4d;
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: block;
+  }
+  
+  .review-button {
+    margin-bottom: 30px; /* Increased gap below Add Review button */
+  }
+  
+  .review-box {
+    background-color: #001f4d;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 1600px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 400px;
+  }
+  
+  .review-box textarea {
+    flex: 1;
+    resize: vertical;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    height: 100%;
+    background-color: #e6f7ff;
+    color: #000;
+  }
+  
+  .send-button {
+    align-self: flex-end;
+    background-color: #80d4ff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  

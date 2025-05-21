@@ -1,0 +1,62 @@
+.otp-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #f5fafd;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .otp-logo {
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .otp-form h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .otp-inputs input {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .resend-btn {
+    display: block;
+    background: none;
+    border: none;
+    color: #3b7cff;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    background-color: #001331;
+    color: white;
+    padding: 12px 0;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .back-link {
+    margin-top: 15px;
+    color: black;
+    font-size: 14px;
+  }
+  
