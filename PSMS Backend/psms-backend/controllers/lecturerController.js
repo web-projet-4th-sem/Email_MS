@@ -1,5 +1,5 @@
 const Project = require('../models/Project');
-const Review = require('../models/Review');
+const Review = require('../models/LecturerReview');
 
 exports.getProjects = async (req, res) => {
   try {
