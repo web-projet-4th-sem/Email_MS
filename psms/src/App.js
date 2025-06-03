@@ -54,7 +54,7 @@ import ViewMember from './Admin/ViewMember';
 import EditMember from './Admin/EditMember'; 
 
 
-function App() {
+function App() { 
   return (
     <Router>
       <Routes>

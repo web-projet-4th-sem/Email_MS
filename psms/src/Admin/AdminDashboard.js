@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const role = localStorage.getItem('userRole');
+    if (role !== 'admin') {
+      navigate('/unauthorized');
+    }
+  }, [navigate]);
 
   return (
     <div className="admin-dashboard">
@@ -14,7 +21,7 @@ const AdminDashboard = () => {
         <div className="admin-profile">
           <img src="/profileImage.jpg" alt="Profile" className="admin-avatar" />
           <div className="admin-info">
-            <p>Hi, Alex</p>
+            <p>Hi, Admin</p>
             <span>E173037</span>
           </div>
         </div>

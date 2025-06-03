@@ -66,26 +66,53 @@ export default function LoginPage() {
 }*/
 // psms-src-src/components/LoginPage.js
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Simulate login check without backend
-    if (email === 'admin1@gmail.com' && password === 'Temp@123') {
-      navigate('/admin/dashboard');
-    } else if (email === 'lecturer1@gmail.com' && password === 'Temp@123') {
-      navigate('/lecturer/dashboard');
-    } else if (email === 'student1@gmail.com' && password === 'Temp@123') {
-      navigate('/student/dashboard');
-    } else {
-      alert('Invalid credentials');
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      console.log("Login API response:", data);
+
+      if (!response.ok) {
+        alert(data.msg || "Login failed");
+        return;
+      }
+
+      // ✅ validate user field exists
+      if (data.token && data.user && data.user.role) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userRole", data.user.role);
+
+        // ✅ redirect by role
+        if (data.user.role === "admin") {
+          navigate("/admin/dashboard");
+        } else if (data.user.role === "student") {
+          navigate("/student/dashboard");
+        } else if (data.user.role === "lecturer") {
+          navigate("/lecturer/dashboard");
+        } else {
+          alert("Unknown role: " + data.user.role);
+        }
+      } else {
+        alert("Unexpected response format from server");
+      }
+    } catch (err) {
+      alert("Server error");
+      console.error(err);
     }
   };
 
