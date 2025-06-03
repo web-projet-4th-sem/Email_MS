@@ -5,9 +5,10 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  code: String, // Optional project code (e.g., OXF/ENG/01)
   description: String,
   technologies: [String],
-  members: [String],
+  members: [String], // regNo or student names
   supervisor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -16,7 +17,7 @@ const projectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-    feedback: [
+  feedback: [
     {
       lecturer: {
         type: mongoose.Schema.Types.ObjectId,
@@ -29,12 +30,11 @@ const projectSchema = new mongoose.Schema({
       }
     }
   ],
-    status: {
+  status: {
     type: String,
     enum: ['pending', 'approved', 'rejected'],
     default: 'pending'
   }
-
 });
 
 module.exports = mongoose.model('Project', projectSchema);
