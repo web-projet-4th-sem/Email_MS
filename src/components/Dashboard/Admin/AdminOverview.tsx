@@ -85,7 +85,7 @@ export default function AdminOverview() {
   }
 
   return (
-    <div>
+    <>
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">System Overview</h2>
         <p className="text-gray-600">Get a quick overview of your academic project management system</p>
@@ -130,6 +130,6 @@ export default function AdminOverview() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
