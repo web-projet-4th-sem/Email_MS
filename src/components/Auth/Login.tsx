@@ -29,6 +29,7 @@ export default function Login() {
     }
   };
 
+  
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-br from-blue-50 to-indigo-100 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
