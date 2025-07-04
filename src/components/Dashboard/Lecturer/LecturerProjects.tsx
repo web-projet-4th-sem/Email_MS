@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Users, FileText, Download, MessageSquare, Send, Clock } from 'lucide-react';
+import { Calendar, Users, FileText, Download, Send, Clock } from 'lucide-react';
 import axios from 'axios';
 
 interface Project {
@@ -53,6 +53,7 @@ export default function LecturerProjects() {
   const [sendingFeedback, setSendingFeedback] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     fetchProjects();
@@ -100,16 +101,16 @@ export default function LecturerProjects() {
       const response = await axios.get(`/submissions/download/${submissionId}`, {
         responseType: 'blob'
       });
-      
+
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      
+
       const contentDisposition = response.headers['content-disposition'];
       const filename = contentDisposition
         ? contentDisposition.split('filename=')[1].replace(/"/g, '')
         : 'download';
-      
+
       link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
@@ -140,7 +141,7 @@ export default function LecturerProjects() {
       setSuccess('Feedback sent successfully!');
       setFeedbackMessage('');
       setSelectedSubmission('');
-      
+
       if (selectedProject) {
         fetchFeedback(selectedProject._id);
       }
@@ -197,16 +198,16 @@ export default function LecturerProjects() {
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">{project.name}</h3>
                   <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    project.status === 'active' 
-                      ? 'bg-green-100 text-green-800' 
+                    project.status === 'active'
+                      ? 'bg-green-100 text-green-800'
                       : 'bg-gray-100 text-gray-800'
                   }`}>
                     {project.status}
                   </span>
                 </div>
-                
+
                 <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-center text-sm text-gray-600">
                     <Calendar className="w-4 h-4 mr-2" />
@@ -318,7 +319,7 @@ export default function LecturerProjects() {
                   ))}
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Feedback Message
@@ -331,7 +332,7 @@ export default function LecturerProjects() {
                   placeholder="Enter your feedback here..."
                 />
               </div>
-              
+
               <button
                 onClick={handleSendFeedback}
                 disabled={sendingFeedback || !feedbackMessage.trim() || !selectedSubmission}
@@ -369,6 +370,19 @@ export default function LecturerProjects() {
           </div>
         </div>
       </div>
+
+      {/* ✅ Footer */}
+      <footer className="mt-16 border-t border-gray-200 py-6 text-center text-sm text-gray-500">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div>&copy; {currentYear} Project Supervision System</div>
+          <div className="flex space-x-4">
+            <a href="/dashboard" className="hover:text-blue-600 transition-colors">Dashboard</a>
+            <a href="/profile" className="hover:text-blue-600 transition-colors">Profile</a>
+            <a href="/support" className="hover:text-blue-600 transition-colors">Support</a>
+          </div>
+          <div>Designed with ❤️ for SE Projects</div>
+        </div>
+      </footer>
     </div>
   );
 }
