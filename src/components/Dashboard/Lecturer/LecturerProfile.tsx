@@ -248,7 +248,7 @@ export default function LecturerProfile() {
             <a href="/profile" className="hover:text-blue-600 transition-colors">Profile</a>
             <a href="/support" className="hover:text-blue-600 transition-colors">Support</a>
           </div>
-          <div>Designed with ❤️ for SE Projects</div>
+          <div>Designed for SE Web Project</div>
         </div>
       </footer>
     </div>
