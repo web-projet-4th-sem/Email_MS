@@ -245,7 +245,7 @@ export default function LecturerProfile() {
           <div>&copy; {new Date().getFullYear()} Project Supervision System</div>
           <div className="flex space-x-4">
             <a href="/dashboard" className="hover:text-blue-600 transition-colors">Dashboard</a>
-            <a href="/profile" className="hover:text-blue-600 transition-colors">Profile</a>
+            <a href="/Profile" className="hover:text-blue-600 transition-colors">Profile</a>
             <a href="/support" className="hover:text-blue-600 transition-colors">Support</a>
           </div>
           <div>Designed for SE Web Project</div>
