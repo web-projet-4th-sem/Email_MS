@@ -1,0 +1,107 @@
+# 📘 Logging Guide for the Project
+
+This document helps developers implement **clean, efficient, and structured logging** in the project. Logging is vital for debugging, performance monitoring, and security auditing.
+
+---
+
+## 🛠 Why Logging Matters
+
+- ✅ Trace errors and bugs
+- 📊 Monitor application health and performance
+- 🔐 Record security-relevant events
+- 💬 Debug and improve user experience
+
+---
+
+## 🧰 Recommended Logging Tool
+
+We recommend using **Winston** for logging in Node.js-based backend projects.
+
+### Install Winston
+
+```bash
+npm install winston
+
+.
+├── logs/
+│   ├── combined.log
+│   └── error.log
+├── utils/
+│   └── logger.js
+└── server.js
+
+// utils/logger.js
+
+const { createLogger, transports, format } = require('winston');
+
+const logger = createLogger({
+  level: 'info',
+  format: format.combine(
+    format.timestamp(),
+    format.printf(({ level, message, timestamp }) => {
+      return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
+    })
+  ),
+  transports: [
+    new transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new transports.File({ filename: 'logs/combined.log' }),
+  ],
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new transports.Console({ format: format.simple() }));
+}
+
+module.exports = logger;
+
+const express = require('express');
+const logger = require('./utils/logger');
+
+const app = express();
+
+app.get('/', (req, res) => {
+  logger.info('Root endpoint was hit');
+  res.send('Hello World!');
+});
+
+app.use((err, req, res, next) => {
+  logger.error(`Server error: ${err.message}`);
+  res.status(500).send('Something went wrong');
+});
+
+npm install winston-daily-rotate-file
+
+const DailyRotateFile = require('winston-daily-rotate-file');
+
+logger.add(new DailyRotateFile({
+  filename: 'logs/app-%DATE%.log',
+  datePattern: 'YYYY-MM-DD',
+  maxFiles: '14d'
+}));
+
+format.printf(({ level, message, timestamp, stack }) => {
+  return stack
+    ? `[${timestamp}] ${level}: ${message} - ${stack}`
+    : `[${timestamp}] ${level}: ${message}`;
+});
+
+npm install morgan
+
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
+
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, 'logs/access.log'),
+  { flags: 'a' }
+);
+
+app.use(morgan('combined', { stream: accessLogStream }));
+
+[2025-07-01T10:00:00.123Z] INFO: Root endpoint was hit
+[2025-07-01T10:01:00.456Z] ERROR: Server error: Database connection failed
+
+LOG_LEVEL=debug
+NODE_ENV=development
+
+level: process.env.LOG_LEVEL || 'info',
