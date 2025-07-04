@@ -29,6 +29,7 @@ export default function LecturerDashboard() {
           </div>
         </main>
       </div>
+   
     </div>
   );
 }
