@@ -138,7 +138,7 @@ export default function AdminOverview() {
       <span className="hidden sm:inline">|</span>
       <span className="flex items-center space-x-1">
         <span role="img" aria-label="graduate">🎓</span>
-        <span>Academic Edition</span>
+        
       </span>
     </div>
 
