@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { UserPlus, Mail, Lock, User, GraduationCap, Users } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -17,6 +18,8 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const navigate = useNavigate();
+
   const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterForm>();
   const password = watch('password');
 
@@ -26,6 +29,7 @@ export default function Register() {
     
     try {
       await registerUser(data.name, data.email, data.password, data.role);
+      navigate('/login');
     } catch (err: any) {
       setError(err.message);
     } finally {

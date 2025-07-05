@@ -66,17 +66,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (name: string, email: string, password: string, role: 'student' | 'lecturer') => {
-    try {
-      const response = await axios.post('/auth/register', { name, email, password, role });
-      const { token, user } = response.data;
-      
-      localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      setUser(user);
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Registration failed');
-    }
-  };
+  try {
+    // Only register the user, don't auto-login
+    await axios.post('/auth/register', { name, email, password, role });
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Registration failed');
+  }
+};
+
 
   const logout = () => {
     localStorage.removeItem('token');
