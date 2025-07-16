@@ -10,6 +10,8 @@ import projectRoutes from './routes/projects.js';
 import userRoutes from './routes/users.js';
 import submissionRoutes from './routes/submissions.js';
 import feedbackRoutes from './routes/feedback.js';
+import notificationRoutes from './routes/notifications.js';
+
 
 dotenv.config();
 
@@ -37,6 +39,8 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/submissions', submissionRoutes);
 app.use('/api/feedback', feedbackRoutes);
+app.use('/api/notifications', notificationRoutes);
+
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/academic_project_management')

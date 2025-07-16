@@ -4,6 +4,7 @@ import Feedback from '../models/Feedback.js';
 import Submission from '../models/Submission.js';
 import Project from '../models/Project.js';
 import { authenticateToken } from '../middleware/auth.js';
+import Notification from '../models/Notification.js';
 
 const router = express.Router();
 
@@ -44,6 +45,12 @@ router.post('/', authenticateToken, [
 
     await feedback.save();
     await feedback.populate(['project', 'student', 'lecturer', 'submission']);
+
+    await Notification.create({
+  user: submission.student,
+  message: `New feedback received for your submission.`,
+  type: 'feedback'
+});
 
     res.status(201).json(feedback);
   } catch (error) {
