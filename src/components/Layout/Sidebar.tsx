@@ -1,14 +1,13 @@
-import React from 'react';
-import { 
-  LayoutDashboard, 
-  FolderOpen, 
-  User, 
-  Users, 
+import React, { useState } from 'react';
+import {
+  LayoutDashboard,
+  FolderOpen,
+  User,
+  Users,
   BookOpen,
-  Plus
+  Plus,
+  Bell
 } from 'lucide-react';
-import { useState, useEffect } from 'react'; // <-- Add this
-import { Bell } from 'lucide-react'; // <-- Already imported others, just add Bell too
 import { useNotification } from '../../contexts/NotificationContext';
 
 interface SidebarItem {
@@ -49,19 +48,18 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
   };
 
   const menuItems = getMenuItems();
+  const { notificationCount, notifications, clearNotifications } = useNotification();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-const { notificationCount, notifications, clearNotifications } = useNotification();
-const [dropdownOpen, setDropdownOpen] = useState(false);
-
-const toggleDropdown = () => {
-  setDropdownOpen(prev => !prev);
-};
+  const toggleDropdown = () => {
+    setDropdownOpen(prev => !prev);
+  };
 
   return (
     <aside className="bg-white w-64 min-h-screen shadow-sm border-r border-gray-200">
       <div className="p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-6">Navigation</h2>
-        <nav className="space-y-2">
+        <nav className="flex flex-col gap-2">
           {menuItems.map((item) => (
             <button
               key={item.id}
@@ -76,51 +74,52 @@ const toggleDropdown = () => {
               <span className="ml-3 font-medium">{item.label}</span>
             </button>
           ))}
-        </nav>
-        <div className="mt-8 px-4 relative">
-  <button
-    onClick={toggleDropdown}
-    className="relative flex items-center gap-2 text-gray-700 hover:text-blue-600 transition w-full"
-  >
-    <Bell className="w-5 h-5" />
-    <span className="font-medium">Notifications</span>
-    {notificationCount > 0 && (
-      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-        {notificationCount}
-      </span>
-    )}
-  </button>
 
-  {dropdownOpen && (
-    <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 max-h-80 overflow-y-auto">
-      {notifications.length === 0 ? (
-        <p className="p-4 text-sm text-gray-500 text-center">No notifications</p>
-      ) : (
-        notifications.map((n) => (
-          <div
-            key={n._id}
-            className={`px-4 py-2 text-sm border-b border-gray-100 ${
-              n.read ? 'text-gray-500' : 'text-gray-900 font-semibold'
-            }`}
-          >
-            <p>{n.message}</p>
-            <span className="text-xs text-gray-400">
-              {new Date(n.createdAt).toLocaleString()}
-            </span>
+          {/* Notifications button inside nav for equal spacing */}
+          <div className="relative px-4">
+            <button
+              onClick={toggleDropdown}
+              className="relative flex items-center gap-2 text-gray-700 hover:text-blue-600 transition w-full"
+            >
+              <Bell className="w-5 h-5" />
+              <span className="font-medium">Notifications</span>
+              {notificationCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  {notificationCount}
+                </span>
+              )}
+            </button>
+
+            {dropdownOpen && (
+              <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 max-h-80 overflow-y-auto">
+                {notifications.length === 0 ? (
+                  <p className="p-4 text-sm text-gray-500 text-center">No notifications</p>
+                ) : (
+                  notifications.map((n) => (
+                    <div
+                      key={n._id}
+                      className={`px-4 py-2 text-sm border-b border-gray-100 ${
+                        n.read ? 'text-gray-500' : 'text-gray-900 font-semibold'
+                      }`}
+                    >
+                      <p>{n.message}</p>
+                      <span className="text-xs text-gray-400">
+                        {new Date(n.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+                  ))
+                )}
+
+                <button
+                  onClick={clearNotifications}
+                  className="w-full text-center text-sm text-blue-600 hover:underline py-2 bg-gray-50 rounded-b-lg"
+                >
+                  Mark all as read
+                </button>
+              </div>
+            )}
           </div>
-        ))
-      )}
-
-      <button
-        onClick={clearNotifications}
-        className="w-full text-center text-sm text-blue-600 hover:underline py-2 bg-gray-50 rounded-b-lg"
-      >
-        Mark all as read
-      </button>
-    </div>
-  )}
-</div>
-
+        </nav>
       </div>
     </aside>
   );
