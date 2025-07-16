@@ -52,19 +52,6 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
 
   const menuItems = getMenuItems();
 
-  /*const [notificationCount, setNotificationCount] = useState(3); // Starting with 3 notifications
-
-// For now, we just simulate it increasing every 10 seconds
-useEffect(() => {
-  const interval = setInterval(() => {
-    setNotificationCount((prev) => prev + 1); // increase count
-  }, 10000); // every 10 seconds
-
-  return () => clearInterval(interval); // stop when component unmounts
-}, []); */
-
-//const { notificationCount, clearNotifications } = useNotification();
-
 const { notificationCount, notifications, clearNotifications } = useNotification();
 const [dropdownOpen, setDropdownOpen] = useState(false);
 
