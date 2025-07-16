@@ -371,7 +371,7 @@ export default function LecturerProjects() {
         </div>
       </div>
 
-      {/* ✅ Footer */}
+      {/*Footer */}
       <footer className="mt-16 border-t border-gray-200 py-6 text-center text-sm text-gray-500">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div>&copy; {currentYear} Project Supervision System</div>

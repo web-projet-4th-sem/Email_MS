@@ -42,7 +42,7 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
     fetchNotifications();
   }, [user]);
 
-  // ✅ Real-time update using socket.io
+  // Real-time update using socket.io
   useEffect(() => {
     socket.on('notification', () => {
       fetchNotifications();

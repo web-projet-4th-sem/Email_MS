@@ -11,8 +11,6 @@ import LoadingSpinner from './components/UI/LoadingSpinner';
 import { NotificationProvider } from './contexts/NotificationContext';
 import socket from './socket';
 
-
-
 function AppContent() {
   const { user, loading } = useAuth();
 

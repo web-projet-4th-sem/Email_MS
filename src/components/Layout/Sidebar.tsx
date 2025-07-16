@@ -11,8 +11,6 @@ import { useState, useEffect } from 'react'; // <-- Add this
 import { Bell } from 'lucide-react'; // <-- Already imported others, just add Bell too
 import { useNotification } from '../../contexts/NotificationContext';
 
-
-
 interface SidebarItem {
   id: string;
   label: string;
