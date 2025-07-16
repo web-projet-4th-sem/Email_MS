@@ -59,9 +59,6 @@ const toggleDropdown = () => {
   setDropdownOpen(prev => !prev);
 };
 
-
-
-
   return (
     <aside className="bg-white w-64 min-h-screen shadow-sm border-r border-gray-200">
       <div className="p-6">
