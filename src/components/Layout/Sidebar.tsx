@@ -75,14 +75,14 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
             </button>
           ))}
 
-          {/* Notifications button inside nav for equal spacing */}
-          <div className="relative px-4">
+          {/* Notifications button (aligned and styled like others) */}
+          <div className="relative">
             <button
               onClick={toggleDropdown}
-              className="relative flex items-center gap-2 text-gray-700 hover:text-blue-600 transition w-full"
+              className="w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors hover:bg-gray-50 text-gray-700"
             >
               <Bell className="w-5 h-5" />
-              <span className="font-medium">Notifications</span>
+              <span className="ml-3 font-medium">Notifications</span>
               {notificationCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                   {notificationCount}
