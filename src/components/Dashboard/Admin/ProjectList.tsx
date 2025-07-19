@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Users, User, Edit, Trash2, Eye } from 'lucide-react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 interface Project {
   _id: string;
@@ -46,18 +47,30 @@ export default function ProjectList() {
   };
 
   const handleDelete = async (projectId: string) => {
-    const confirmed = window.confirm('Are you sure you want to delete this project?');
-    if (!confirmed) return;
+    /*const confirmed = window.confirm('Are you sure you want to delete this project?');
+    if (!confirmed) return;*/
+
+    const result = await Swal.fire({
+  title: 'Are you sure?',
+  text: 'Do you really want to delete this project?',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  confirmButtonText: 'Yes, delete it!',
+});
+
+if (!result.isConfirmed) return;
 
     try {
-      const token = localStorage.getItem('token'); // 🔑 Get token
+      const token = localStorage.getItem('token'); // Get token
       await axios.delete(`/projects/${projectId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProjects(projects.filter(project => project._id !== projectId));
-      alert('Project deleted successfully');
+      Swal.fire('Deleted!', 'Project has been deleted.', 'success');
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to delete project');
+      Swal.fire('Error', error.response?.data?.message || 'Failed to delete project', 'error');
     }
   };
 
