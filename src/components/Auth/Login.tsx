@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { LogIn, Mail, Lock, GraduationCap } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+
 
 interface LoginForm {
   email: string;
@@ -13,6 +14,10 @@ export default function Login() {
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const location = useLocation();
+  const successMessage = location.state?.successMessage || '';
+  
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();
 
@@ -45,6 +50,12 @@ export default function Login() {
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          {successMessage && (
+  <div className="px-4 py-3 text-sm text-green-700 border border-green-200 rounded-lg bg-green-50">
+    {successMessage}
+  </div>
+)}
+
           {error && (
             <div className="px-4 py-3 text-sm text-red-600 border border-red-200 rounded-lg bg-red-50">
               {error}

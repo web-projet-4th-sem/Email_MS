@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-//import { Link } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { UserPlus, Mail, Lock, User, GraduationCap, Users } from 'lucide-react';
@@ -29,7 +28,9 @@ export default function Register() {
     
     try {
       await registerUser(data.name, data.email, data.password, data.role);
-      navigate('/login');
+     navigate('/login', {
+      state: { successMessage: 'Registration successful! Please log in.' }
+    });
     } catch (err: any) {
       setError(err.message);
     } finally {

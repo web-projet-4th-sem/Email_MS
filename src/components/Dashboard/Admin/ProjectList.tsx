@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Users, User, Edit, Trash2, Eye } from 'lucide-react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 interface Project {
   _id: string;
@@ -32,13 +33,44 @@ export default function ProjectList() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('/projects');
+      const token = localStorage.getItem('token'); // 🔑 Get token
+      const response = await axios.get('/projects', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
       setError('Failed to fetch projects');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (projectId: string) => {
+    /*const confirmed = window.confirm('Are you sure you want to delete this project?');
+    if (!confirmed) return;*/
+
+    const result = await Swal.fire({
+  title: 'Are you sure?',
+  text: 'Do you really want to delete this project?',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  confirmButtonText: 'Yes, delete it!',
+});
+
+if (!result.isConfirmed) return;
+
+    try {
+      const token = localStorage.getItem('token'); // Get token
+      await axios.delete(`/projects/${projectId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setProjects(projects.filter(project => project._id !== projectId));
+      Swal.fire('Deleted!', 'Project has been deleted.', 'success');
+    } catch (error: any) {
+      Swal.fire('Error', error.response?.data?.message || 'Failed to delete project', 'error');
     }
   };
 
@@ -101,24 +133,12 @@ export default function ProjectList() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Project
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Supervisor
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Students
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Deadline
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Supervisor</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Students</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deadline</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -126,12 +146,8 @@ export default function ProjectList() {
                   <tr key={project._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <div className="text-sm font-medium text-gray-900 line-clamp-1">
-                          {project.name}
-                        </div>
-                        <div className="text-sm text-gray-500 line-clamp-2">
-                          {project.description}
-                        </div>
+                        <div className="text-sm font-medium text-gray-900 line-clamp-1">{project.name}</div>
+                        <div className="text-sm text-gray-500 line-clamp-2">{project.description}</div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -140,12 +156,8 @@ export default function ProjectList() {
                           <User className="w-4 h-4 text-blue-600" />
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-gray-900">
-                            {project.supervisor.name}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {project.supervisor.email}
-                          </div>
+                          <div className="text-sm font-medium text-gray-900">{project.supervisor.name}</div>
+                          <div className="text-sm text-gray-500">{project.supervisor.email}</div>
                         </div>
                       </div>
                     </td>
@@ -160,9 +172,7 @@ export default function ProjectList() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <Calendar className="w-4 h-4 text-gray-400 mr-2" />
-                        <span className="text-sm text-gray-900">
-                          {formatDate(project.deadline)}
-                        </span>
+                        <span className="text-sm text-gray-900">{formatDate(project.deadline)}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -178,7 +188,10 @@ export default function ProjectList() {
                         <button className="text-indigo-600 hover:text-indigo-900 transition-colors">
                           <Edit className="w-4 h-4" />
                         </button>
-                        <button className="text-red-600 hover:text-red-900 transition-colors">
+                        <button
+                          className="text-red-600 hover:text-red-900 transition-colors"
+                          onClick={() => handleDelete(project._id)}
+                        >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -190,38 +203,34 @@ export default function ProjectList() {
           </div>
         </div>
       )}
-       <footer className="mt-12 border-t border-gray-200 pt-6 pb-4 text-sm text-gray-500 bg-white">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-    
-    <div className="flex items-center space-x-2">
-      <span>© {new Date().getFullYear()} Project Supervision System</span>
-      <span className="hidden sm:inline">|</span>
-      <span className="flex items-center space-x-1">
-        <span role="img" aria-label="graduate">🎓</span>
-        
-      </span>
-    </div>
 
-    <div className="flex items-center space-x-4">
-      <a href="/dashboard" className="hover:text-blue-600 transition-colors flex items-center">
-        🧭 Dashboard
-      </a>
-      <a href="/profile" className="hover:text-blue-600 transition-colors flex items-center">
-        👤 Profile
-      </a>
-      <a href="/support" className="hover:text-blue-600 transition-colors flex items-center">
-        🛠️ Support
-      </a>
-    </div>
-
-    <div className="text-center md:text-right">
-      <span className="flex items-center space-x-1">
-        <span role="img" aria-label="heart"></span>
-        <span>Designed for SE Web Projects</span>
-      </span>
-    </div>
-  </div>
-</footer>
+      <footer className="mt-12 border-t border-gray-200 pt-6 pb-4 text-sm text-gray-500 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center space-x-2">
+            <span>© {new Date().getFullYear()} Project Supervision System</span>
+            <span className="hidden sm:inline">|</span>
+            <span className="flex items-center space-x-1">
+              <span role="img" aria-label="graduate">🎓</span>
+            </span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <a href="/dashboard" className="hover:text-blue-600 transition-colors flex items-center">
+              🧭 Dashboard
+            </a>
+            <a href="/profile" className="hover:text-blue-600 transition-colors flex items-center">
+              👤 Profile
+            </a>
+            <a href="/support" className="hover:text-blue-600 transition-colors flex items-center">
+              🛠️ Support
+            </a>
+          </div>
+          <div className="text-center md:text-right">
+            <span className="flex items-center space-x-1">
+              <span>Designed for SE Web Projects</span>
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -128,4 +128,21 @@ router.put('/:id', authenticateToken, requireRole(['admin']), async (req, res) =
   }
 });
 
+
+
+// Delete a project (Admin only)
+router.delete('/:id', authenticateToken, requireRole(['admin']), async (req, res) => {
+  try {
+    const project = await Project.findByIdAndDelete(req.params.id);
+
+    if (!project) {
+      return res.status(404).json({ message: 'Project not found' });
+    }
+
+    res.json({ message: 'Project deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 export default router;

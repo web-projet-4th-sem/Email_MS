@@ -5,6 +5,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import Submission from '../models/Submission.js';
 import Project from '../models/Project.js';
+import Notification from '../models/Notification.js';
 import { authenticateToken } from '../middleware/auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -76,6 +77,16 @@ router.post('/', authenticateToken, upload.single('proposal'), async (req, res) 
 
     await submission.save();
     await submission.populate(['project', 'student']);
+
+    // Notify the lecturer (supervisor)
+if (submission.project && submission.project.supervisor) {
+  await Notification.create({
+    user: submission.project.supervisor,
+    message: `New proposal submitted by ${submission.student.name} for project "${submission.project.name}".`,
+    type: 'submission'
+  });
+}
+
 
     res.status(201).json(submission);
   } catch (error) {

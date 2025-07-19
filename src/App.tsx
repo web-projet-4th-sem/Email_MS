@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { useAuth } from './contexts/AuthContext';
@@ -8,9 +8,17 @@ import AdminDashboard from './components/Dashboard/AdminDashboard';
 import StudentDashboard from './components/Dashboard/StudentDashboard';
 import LecturerDashboard from './components/Dashboard/LecturerDashboard';
 import LoadingSpinner from './components/UI/LoadingSpinner';
+import { NotificationProvider } from './contexts/NotificationContext';
+import socket from './socket';
 
 function AppContent() {
   const { user, loading } = useAuth();
+
+  useEffect(() => {
+  if (user && user.email) {
+    socket.emit('join', user.email); // tell backend: user is online
+  }
+}, [user]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -60,8 +68,10 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+  <NotificationProvider>
+    <AppContent />
+  </NotificationProvider>
+</AuthProvider>
   );
 }
 
