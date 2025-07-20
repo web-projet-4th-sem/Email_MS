@@ -12,7 +12,6 @@ import submissionRoutes from './routes/submissions.js';
 import feedbackRoutes from './routes/feedback.js';
 import notificationRoutes from './routes/notifications.js';
 
-
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
