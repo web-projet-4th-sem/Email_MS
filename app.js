@@ -4,6 +4,6 @@ const adminRoutes = require('./routes/admin');
 
 app.use('/api/admin', adminRoutes);
 
-// ...existing code...
+//existing code
 
 module.exports = app;
