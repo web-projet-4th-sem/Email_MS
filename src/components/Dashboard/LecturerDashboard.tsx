@@ -82,6 +82,7 @@ export default function LecturerDashboard() {
                   🛠️ Support
                 </a>
               </div>
+              
 
               <div className="text-center md:text-right">
                 <span className="flex items-center justify-center space-x-1">
