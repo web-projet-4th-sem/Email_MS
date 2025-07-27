@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   LayoutDashboard,
   FolderOpen,
@@ -56,22 +56,22 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
   };
 
   return (
-    <aside className="bg-white w-64 min-h-screen shadow-sm border-r border-gray-200">
-      <div className="p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-6">Navigation</h2>
-        <nav className="flex flex-col gap-2">
+    <aside className="bg-white w-64 h-full shadow-lg border-r border-gray-200 flex flex-col">
+      <div className="p-4 sm:p-6 flex-1">
+        <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Navigation</h2>
+        <nav className="flex flex-col gap-1 sm:gap-2">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => onTabChange(item.id)}
-              className={`w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors ${
+              className={`w-full flex items-center px-3 py-2 sm:px-4 sm:py-3 text-left rounded-lg transition-colors text-sm sm:text-base ${
                 activeTab === item.id
                   ? 'bg-blue-50 text-blue-700 border border-blue-200'
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
             >
               {item.icon}
-              <span className="ml-3 font-medium">{item.label}</span>
+              <span className="ml-2 sm:ml-3 font-medium">{item.label}</span>
             </button>
           ))}
 
@@ -79,30 +79,30 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
           <div className="relative">
             <button
               onClick={toggleDropdown}
-              className="w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors hover:bg-gray-50 text-gray-700"
+              className="w-full flex items-center px-3 py-2 sm:px-4 sm:py-3 text-left rounded-lg transition-colors hover:bg-gray-50 text-gray-700 text-sm sm:text-base"
             >
               <Bell className="w-5 h-5" />
-              <span className="ml-3 font-medium">Notifications</span>
+              <span className="ml-2 sm:ml-3 font-medium">Notifications</span>
               {notificationCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                <span className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center">
                   {notificationCount}
                 </span>
               )}
             </button>
 
             {dropdownOpen && (
-              <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-10 max-h-80 overflow-y-auto">
+              <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-64 sm:max-h-80 overflow-y-auto">
                 {notifications.length === 0 ? (
-                  <p className="p-4 text-sm text-gray-500 text-center">No notifications</p>
+                  <p className="p-3 sm:p-4 text-xs sm:text-sm text-gray-500 text-center">No notifications</p>
                 ) : (
                   notifications.map((n) => (
                     <div
                       key={n._id}
-                      className={`px-4 py-2 text-sm border-b border-gray-100 ${
+                      className={`px-3 py-2 sm:px-4 text-xs sm:text-sm border-b border-gray-100 ${
                         n.read ? 'text-gray-500' : 'text-gray-900 font-semibold'
                       }`}
                     >
-                      <p>{n.message}</p>
+                      <p className="break-words">{n.message}</p>
                       <span className="text-xs text-gray-400">
                         {new Date(n.createdAt).toLocaleString()}
                       </span>
@@ -112,7 +112,7 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
 
                 <button
                   onClick={clearNotifications}
-                  className="w-full text-center text-sm text-blue-600 hover:underline py-2 bg-gray-50 rounded-b-lg"
+                  className="w-full text-center text-xs sm:text-sm text-blue-600 hover:underline py-2 bg-gray-50 rounded-b-lg"
                 >
                   Mark all as read
                 </button>

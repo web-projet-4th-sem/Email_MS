@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Plus, User, Users, Calendar, FileText } from 'lucide-react';
 import axios from 'axios';
@@ -74,13 +74,13 @@ export default function CreateProject() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Create New Project</h2>
-        <p className="text-gray-600">Set up a new academic project with students and supervisor</p>
+    <div className="max-w-4xl mx-auto px-2 sm:px-0">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Create New Project</h2>
+        <p className="text-sm sm:text-base text-gray-600">Set up a new academic project with students and supervisor</p>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
         {success && (
           <div className="mb-6 bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg">
             {success}
