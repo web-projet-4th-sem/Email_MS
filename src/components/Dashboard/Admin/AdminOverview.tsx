@@ -77,7 +77,7 @@ export default function AdminOverview() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="w-8 h-8 mx-auto border-b-2 border-blue-600 rounded-full animate-spin"></div>
           <p className="mt-2 text-sm text-gray-600">Loading overview...</p>
         </div>
       </div>
@@ -86,83 +86,80 @@ export default function AdminOverview() {
 
   return (
     <>
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">System Overview</h2>
-        <p className="text-gray-600">Get a quick overview of your academic project management system</p>
+      <div className="px-2 mb-8 sm:px-4">
+        <h2 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl">System Overview</h2>
+        <p className="text-sm text-gray-600 sm:text-base">Get a quick overview of your academic project management system</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-4 px-2 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:px-0">
         {statCards.map((card, index) => (
           <div
             key={index}
-            className={`${card.color} rounded-lg border-2 p-6 transition-transform hover:scale-105`}
+            className={`${card.color} rounded-lg border-2 p-4 sm:p-6 transition-transform hover:scale-105`}
           >
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
+            <div className="flex flex-col items-center sm:flex-row sm:items-start">
+              <div className="flex-shrink-0 mb-2 sm:mb-0">
                 {card.icon}
               </div>
-              <div className="ml-4">
+              <div className="text-center sm:ml-4 sm:text-left">
                 <p className="text-sm font-medium text-gray-600">{card.title}</p>
-                <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+                <p className="text-xl font-bold text-gray-900 sm:text-2xl">{card.value}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="text-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <BookOpen className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+      <div className="p-4 mx-2 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 sm:mx-0">
+        <h3 className="mb-4 text-lg font-semibold text-center text-gray-900 sm:text-left">Quick Actions</h3>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 sm:gap-4">
+          <div className="p-3 text-center transition-colors border border-gray-200 rounded-lg sm:p-4 hover:bg-gray-50">
+            <BookOpen className="w-8 h-8 mx-auto mb-2 text-blue-600" />
             <p className="font-medium text-gray-900">Create New Project</p>
             <p className="text-sm text-gray-600">Set up a new academic project</p>
           </div>
-          <div className="text-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <Users className="w-8 h-8 text-purple-600 mx-auto mb-2" />
+          <div className="p-3 text-center transition-colors border border-gray-200 rounded-lg sm:p-4 hover:bg-gray-50">
+            <Users className="w-8 h-8 mx-auto mb-2 text-purple-600" />
             <p className="font-medium text-gray-900">Manage Users</p>
             <p className="text-sm text-gray-600">View and manage system users</p>
           </div>
-          <div className="text-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <Clock className="w-8 h-8 text-green-600 mx-auto mb-2" />
+          <div className="p-3 text-center transition-colors border border-gray-200 rounded-lg sm:p-4 hover:bg-gray-50">
+            <Clock className="w-8 h-8 mx-auto mb-2 text-green-600" />
             <p className="font-medium text-gray-900">View Projects</p>
             <p className="text-sm text-gray-600">Monitor all active projects</p>
           </div>
         </div>
       </div>
-      <footer className="mt-12 border-t border-gray-200 pt-6 pb-4 text-sm text-gray-500 bg-white">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-    
-    <div className="flex items-center space-x-2">
-      <span>© {new Date().getFullYear()} Project Supervision System</span>
-      <span className="hidden sm:inline">|</span>
-      <span className="flex items-center space-x-1">
-        <span role="img" aria-label="graduate">🎓</span>
-        
-      </span>
-    </div>
+      <footer className="pt-6 pb-4 mt-12 text-sm text-gray-500 bg-white border-t border-gray-200">
+        <div className="flex flex-col max-w-6xl gap-4 px-2 mx-auto sm:px-4 lg:px-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col items-center space-y-1 sm:flex-row sm:space-y-0 sm:space-x-2">
+            <span>© {new Date().getFullYear()} Project Supervision System</span>
+            <span className="hidden sm:inline">|</span>
+            <span className="flex items-center space-x-1">
+              <span role="img" aria-label="graduate">🎓</span>
+            </span>
+          </div>
 
-    <div className="flex items-center space-x-4">
-      <a href="/dashboard" className="hover:text-blue-600 transition-colors flex items-center">
-        🧭 Dashboard
-      </a>
-      <a href="/profile" className="hover:text-blue-600 transition-colors flex items-center">
-        👤 Profile
-      </a>
-      <a href="/support" className="hover:text-blue-600 transition-colors flex items-center">
-        🛠️ Support
-      </a>
-    </div>
+          <div className="flex flex-col items-center space-y-1 sm:flex-row sm:space-y-0 sm:space-x-4">
+            <a href="/dashboard" className="flex items-center transition-colors hover:text-blue-600">
+              🧭 Dashboard
+            </a>
+            <a href="/profile" className="flex items-center transition-colors hover:text-blue-600">
+              👤 Profile
+            </a>
+            <a href="/support" className="flex items-center transition-colors hover:text-blue-600">
+              🛠️ Support
+            </a>
+          </div>
 
-    <div className="text-center md:text-right">
-      <span className="flex items-center space-x-1">
-        <span role="img" aria-label="heart"></span>
-        <span>Designed for SE Web Projects</span>
-      </span>
-    </div>
-  </div>
-</footer>
-
+          <div className="text-center md:text-right">
+            <span className="flex items-center space-x-1">
+              <span role="img" aria-label="heart"></span>
+              <span>Designed for SE Web Projects</span>
+            </span>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
