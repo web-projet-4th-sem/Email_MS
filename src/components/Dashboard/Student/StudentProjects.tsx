@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar, FileText, Upload, MessageSquare, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
@@ -186,28 +186,28 @@ export default function StudentProjects() {
   if (!selectedProject) {
     return (
       <div>
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">My Projects</h2>
-          <p className="text-gray-600">View and manage your assigned projects</p>
+        <div className="mb-6 sm:mb-8 px-2 sm:px-0">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">My Projects</h2>
+          <p className="text-sm sm:text-base text-gray-600">View and manage your assigned projects</p>
         </div>
 
         {projects.length === 0 ? (
-          <div className="text-center py-12">
-            <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No Projects Assigned</h3>
-            <p className="text-gray-600">You haven't been assigned any projects yet.</p>
+          <div className="text-center py-8 sm:py-12 px-4">
+            <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">No Projects Assigned</h3>
+            <p className="text-sm sm:text-base text-gray-600">You haven't been assigned any projects yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-2 sm:px-0">
             {projects.map((project) => (
               <div
                 key={project._id}
-                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">{project.name}</h3>
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                <div className="flex items-start justify-between mb-3 sm:mb-4">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 line-clamp-2 pr-2">{project.name}</h3>
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full flex-shrink-0 ${
                     project.status === 'active' 
                       ? 'bg-green-100 text-green-800' 
                       : 'bg-gray-100 text-gray-800'
@@ -216,18 +216,18 @@ export default function StudentProjects() {
                   </span>
                 </div>
                 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p>
+                <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">{project.description}</p>
                 
                 <div className="space-y-2">
-                  <div className={`flex items-center text-sm ${
+                  <div className={`flex items-center text-xs sm:text-sm ${
                     isDeadlinePassed(project.deadline) ? 'text-red-600' : 'text-gray-600'
                   }`}>
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Due: {formatDate(project.deadline)}
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">Due: {formatDate(project.deadline)}</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <FileText className="w-4 h-4 mr-2" />
-                    Supervisor: {project.supervisor.name}
+                  <div className="flex items-center text-xs sm:text-sm text-gray-600">
+                    <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">Supervisor: {project.supervisor.name}</span>
                   </div>
                 </div>
               </div>
@@ -239,62 +239,68 @@ export default function StudentProjects() {
   }
 
   return (
-    <div>
-      <div className="mb-6">
+    <div className="px-2 sm:px-0">
+      <div className="mb-4 sm:mb-6">
         <button
           onClick={() => setSelectedProject(null)}
-          className="text-blue-600 hover:text-blue-800 font-medium mb-4"
+          className="text-blue-600 hover:text-blue-800 font-medium mb-3 sm:mb-4 text-sm sm:text-base"
         >
           ← Back to Projects
         </button>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedProject.name}</h2>
-        <p className="text-gray-600">{selectedProject.description}</p>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{selectedProject.name}</h2>
+        <p className="text-sm sm:text-base text-gray-600">{selectedProject.description}</p>
       </div>
 
       {error && (
-        <div className="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+        <div className="mb-4 sm:mb-6 bg-red-50 border border-red-200 text-red-600 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm">
           {error}
         </div>
       )}
 
       {success && (
-        <div className="mb-6 bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg">
+        <div className="mb-4 sm:mb-6 bg-green-50 border border-green-200 text-green-600 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm">
           {success}
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         {/* Project Details & Submission */}
-        <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Project Details</h3>
-            <div className="space-y-3">
-              <div className={`flex items-center text-sm ${
+        <div className="space-y-4 sm:space-y-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Project Details</h3>
+            <div className="space-y-2 sm:space-y-3">
+              <div className={`flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm ${
                 isDeadlinePassed(selectedProject.deadline) ? 'text-red-600' : 'text-gray-600'
               }`}>
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>Deadline:</span>
-                <span className="ml-2 font-medium">{formatDate(selectedProject.deadline)}</span>
-                {isDeadlinePassed(selectedProject.deadline) && (
-                  <span className="ml-2 text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">
-                    Overdue
-                  </span>
-                )}
+                <div className="flex items-center mb-1 sm:mb-0">
+                  <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" />
+                  <span>Deadline:</span>
+                </div>
+                <div className="flex items-center sm:ml-2">
+                  <span className="font-medium">{formatDate(selectedProject.deadline)}</span>
+                  {isDeadlinePassed(selectedProject.deadline) && (
+                    <span className="ml-2 text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">
+                      Overdue
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="flex items-center text-sm text-gray-600">
-                <FileText className="w-4 h-4 mr-2" />
-                <span>Supervisor:</span>
-                <span className="ml-2 font-medium">{selectedProject.supervisor.name}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm text-gray-600">
+                <div className="flex items-center mb-1 sm:mb-0">
+                  <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" />
+                  <span>Supervisor:</span>
+                </div>
+                <span className="font-medium sm:ml-2 truncate">{selectedProject.supervisor.name}</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Submit Proposal</h3>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Submit Proposal</h3>
             
             <div
               {...getRootProps()}
-              className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
+              className={`border-2 border-dashed rounded-lg p-4 sm:p-6 text-center cursor-pointer transition-colors ${
                 isDragActive
                   ? 'border-blue-400 bg-blue-50'
                   : selectedFile
@@ -303,24 +309,24 @@ export default function StudentProjects() {
               }`}
             >
               <input {...getInputProps()} />
-              <Upload className={`w-8 h-8 mx-auto mb-2 ${
+              <Upload className={`w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2 ${
                 selectedFile ? 'text-green-600' : 'text-gray-400'
               }`} />
               {selectedFile ? (
                 <div>
-                  <p className="text-sm font-medium text-green-800">{selectedFile.name}</p>
+                  <p className="text-xs sm:text-sm font-medium text-green-800 break-all">{selectedFile.name}</p>
                   <p className="text-xs text-green-600">
                     {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>
               ) : (
                 <div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs sm:text-sm text-gray-600 px-2">
                     {isDragActive
                       ? 'Drop the file here...'
                       : 'Drag & drop your proposal file here, or click to select'}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-1 px-2">
                     Supported formats: PDF, DOC, DOCX, TXT, ZIP, RAR (Max 10MB)
                   </p>
                 </div>
@@ -330,23 +336,23 @@ export default function StudentProjects() {
             <button
               onClick={handleSubmission}
               disabled={!selectedFile || uploading || isDeadlinePassed(selectedProject.deadline)}
-              className="w-full mt-4 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full mt-3 sm:mt-4 inline-flex items-center justify-center px-3 py-2 sm:px-4 border border-transparent text-xs sm:text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              <Upload className="w-4 h-4 mr-2" />
+              <Upload className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
               {uploading ? 'Submitting...' : 'Submit Proposal'}
             </button>
 
             {isDeadlinePassed(selectedProject.deadline) && (
-              <p className="mt-2 text-sm text-red-600 text-center">
+              <p className="mt-2 text-xs sm:text-sm text-red-600 text-center">
                 Submission deadline has passed
               </p>
             )}
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">My Submissions</h3>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">My Submissions</h3>
             {submissions.length === 0 ? (
-              <p className="text-gray-600 text-center py-4">No submissions yet</p>
+              <p className="text-gray-600 text-center py-3 sm:py-4 text-sm">No submissions yet</p>
             ) : (
               <div className="space-y-3">
                 {submissions.map((submission) => (

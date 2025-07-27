@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { User, Mail, FileText, Camera, Save } from 'lucide-react';
 import { useAuth } from '../../../contexts/AuthContext';
 
@@ -51,79 +51,79 @@ export default function StudentProfile() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Student Profile</h2>
-        <p className="text-gray-600">Manage your profile information and settings</p>
+    <div className="max-w-4xl px-2 mx-auto sm:px-0">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="mb-2 text-xl font-bold text-gray-900 sm:text-2xl">Student Profile</h2>
+        <p className="text-sm text-gray-600 sm:text-base">Manage your profile information and settings</p>
       </div>
 
       {success && (
-        <div className="mb-6 bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg">
+        <div className="px-3 py-2 mb-4 text-sm text-green-600 border border-green-200 rounded-lg sm:mb-6 bg-green-50 sm:px-4 sm:py-3">
           {success}
         </div>
       )}
 
       {error && (
-        <div className="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+        <div className="px-3 py-2 mb-4 text-sm text-red-600 border border-red-200 rounded-lg sm:mb-6 bg-red-50 sm:px-4 sm:py-3">
           {error}
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm">
         {/* Profile Header */}
-        <div className="bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-8">
-          <div className="flex items-center space-x-6">
-            <div className="relative">
+        <div className="px-4 py-6 bg-gradient-to-r from-blue-500 to-indigo-600 sm:px-6 sm:py-8">
+          <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 sm:items-start">
+            <div className="relative flex-shrink-0">
               {formData.profilePicture ? (
                 <img
                   src={formData.profilePicture}
                   alt="Profile"
-                  className="w-20 h-20 rounded-full border-4 border-white object-cover"
+                  className="object-cover w-16 h-16 border-4 border-white rounded-full sm:w-20 sm:h-20"
                 />
               ) : (
-                <div className="w-20 h-20 bg-white rounded-full border-4 border-white flex items-center justify-center">
-                  <User className="w-10 h-10 text-gray-400" />
+                <div className="flex items-center justify-center w-16 h-16 bg-white border-4 border-white rounded-full sm:w-20 sm:h-20">
+                  <User className="w-8 h-8 text-gray-400 sm:w-10 sm:h-10" />
                 </div>
               )}
               {isEditing && (
-                <button className="absolute bottom-0 right-0 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors">
-                  <Camera className="w-4 h-4" />
+                <button className="absolute bottom-0 right-0 bg-blue-600 text-white p-1.5 sm:p-2 rounded-full hover:bg-blue-700 transition-colors">
+                  <Camera className="w-3 h-3 sm:w-4 sm:h-4" />
                 </button>
               )}
             </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-bold text-white">{user?.name}</h3>
-              <p className="text-blue-100 capitalize">{user?.role}</p>
-              <div className="flex items-center mt-2 text-blue-100">
-                <Mail className="w-4 h-4 mr-2" />
-                {user?.email}
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-xl font-bold text-white sm:text-2xl">{user?.name}</h3>
+              <p className="text-sm text-blue-100 capitalize sm:text-base">{user?.role}</p>
+              <div className="flex items-center justify-center mt-2 text-blue-100 sm:justify-start">
+                <Mail className="w-3 h-3 mr-2 sm:w-4 sm:h-4" />
+                <span className="text-xs truncate sm:text-sm">{user?.email}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Profile Content */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {!isEditing ? (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">Profile Information</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <h4 className="mb-3 text-base font-semibold text-gray-900 sm:text-lg sm:mb-4">Profile Information</h4>
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 sm:gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block mb-2 text-xs font-medium text-gray-700 sm:text-sm">
                       Full Name
                     </label>
-                    <div className="flex items-center p-3 bg-gray-50 rounded-lg">
-                      <User className="w-5 h-5 text-gray-400 mr-3" />
-                      <span className="text-gray-900">{user?.name}</span>
+                    <div className="flex items-center p-3 rounded-lg bg-gray-50">
+                      <User className="flex-shrink-0 w-4 h-4 mr-3 text-gray-400 sm:w-5 sm:h-5" />
+                      <span className="text-sm text-gray-900 truncate sm:text-base">{user?.name}</span>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
                       Email Address
                     </label>
-                    <div className="flex items-center p-3 bg-gray-50 rounded-lg">
-                      <Mail className="w-5 h-5 text-gray-400 mr-3" />
+                    <div className="flex items-center p-3 rounded-lg bg-gray-50">
+                      <Mail className="w-5 h-5 mr-3 text-gray-400" />
                       <span className="text-gray-900">{user?.email}</span>
                     </div>
                   </div>
@@ -131,10 +131,10 @@ export default function StudentProfile() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   About Me
                 </label>
-                <div className="flex items-start p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-start p-3 rounded-lg bg-gray-50">
                   <FileText className="w-5 h-5 text-gray-400 mr-3 mt-0.5" />
                   <span className="text-gray-900">
                     {user?.description || 'No description provided'}
@@ -145,7 +145,7 @@ export default function StudentProfile() {
               <div className="flex justify-end">
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-colors bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Edit Profile
                 </button>
@@ -154,14 +154,14 @@ export default function StudentProfile() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">Edit Profile Information</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <h4 className="mb-4 text-lg font-semibold text-gray-900">Edit Profile Information</h4>
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
                       Full Name
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <User className="w-5 h-5 text-gray-400" />
                       </div>
                       <input
@@ -169,18 +169,18 @@ export default function StudentProfile() {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="block w-full py-3 pl-10 pr-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Enter your full name"
                         required
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
                       Profile Picture URL
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <Camera className="w-5 h-5 text-gray-400" />
                       </div>
                       <input
@@ -188,7 +188,7 @@ export default function StudentProfile() {
                         name="profilePicture"
                         value={formData.profilePicture}
                         onChange={handleInputChange}
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="block w-full py-3 pl-10 pr-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Enter profile picture URL"
                       />
                     </div>
@@ -197,11 +197,11 @@ export default function StudentProfile() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block mb-2 text-sm font-medium text-gray-700">
                   About Me
                 </label>
                 <div className="relative">
-                  <div className="absolute top-3 left-3 pointer-events-none">
+                  <div className="absolute pointer-events-none top-3 left-3">
                     <FileText className="w-5 h-5 text-gray-400" />
                   </div>
                   <textarea
@@ -209,7 +209,7 @@ export default function StudentProfile() {
                     value={formData.description}
                     onChange={handleInputChange}
                     rows={4}
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="block w-full py-3 pl-10 pr-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Tell us about yourself, your interests, and academic goals..."
                   />
                 </div>
@@ -219,14 +219,14 @@ export default function StudentProfile() {
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 transition-colors bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-colors bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   {loading ? 'Saving...' : 'Save Changes'}
