@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar, Users, FileText, Download, Send, Clock } from 'lucide-react';
 import axios from 'axios';
 
@@ -176,28 +176,28 @@ export default function LecturerProjects() {
   if (!selectedProject) {
     return (
       <div>
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Supervised Projects</h2>
-          <p className="text-gray-600">Manage and supervise your assigned projects</p>
+        <div className="mb-6 sm:mb-8 px-2 sm:px-0">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Supervised Projects</h2>
+          <p className="text-sm sm:text-base text-gray-600">Manage and supervise your assigned projects</p>
         </div>
 
         {projects.length === 0 ? (
-          <div className="text-center py-12">
-            <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No Projects Assigned</h3>
-            <p className="text-gray-600">You haven't been assigned any projects to supervise yet.</p>
+          <div className="text-center py-8 sm:py-12 px-4">
+            <FileText className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">No Projects Assigned</h3>
+            <p className="text-sm sm:text-base text-gray-600">You haven't been assigned any projects to supervise yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-2 sm:px-0">
             {projects.map((project) => (
               <div
                 key={project._id}
-                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">{project.name}</h3>
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                <div className="flex items-start justify-between mb-3 sm:mb-4">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 line-clamp-2 pr-2">{project.name}</h3>
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full flex-shrink-0 ${
                     project.status === 'active'
                       ? 'bg-green-100 text-green-800'
                       : 'bg-gray-100 text-gray-800'
@@ -206,16 +206,16 @@ export default function LecturerProjects() {
                   </span>
                 </div>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p>
+                <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">{project.description}</p>
 
                 <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Due: {formatDate(project.deadline)}
+                  <div className="flex items-center text-xs sm:text-sm text-gray-600">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">Due: {formatDate(project.deadline)}</span>
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Users className="w-4 h-4 mr-2" />
-                    {project.students.length} student{project.students.length !== 1 ? 's' : ''}
+                  <div className="flex items-center text-xs sm:text-sm text-gray-600">
+                    <Users className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">{project.students.length} student{project.students.length !== 1 ? 's' : ''}</span>
                   </div>
                 </div>
               </div>
@@ -227,57 +227,61 @@ export default function LecturerProjects() {
   }
 
   return (
-    <div>
-      <div className="mb-6">
+    <div className="px-2 sm:px-0">
+      <div className="mb-4 sm:mb-6">
         <button
           onClick={() => setSelectedProject(null)}
-          className="text-blue-600 hover:text-blue-800 font-medium mb-4"
+          className="text-blue-600 hover:text-blue-800 font-medium mb-3 sm:mb-4 text-sm sm:text-base"
         >
           ← Back to Projects
         </button>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">{selectedProject.name}</h2>
-        <p className="text-gray-600">{selectedProject.description}</p>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{selectedProject.name}</h2>
+        <p className="text-sm sm:text-base text-gray-600">{selectedProject.description}</p>
       </div>
 
       {error && (
-        <div className="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+        <div className="mb-4 sm:mb-6 bg-red-50 border border-red-200 text-red-600 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm">
           {error}
         </div>
       )}
 
       {success && (
-        <div className="mb-6 bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg">
+        <div className="mb-4 sm:mb-6 bg-green-50 border border-green-200 text-green-600 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm">
           {success}
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         {/* Project Details & Submissions */}
-        <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Project Details</h3>
-            <div className="space-y-3">
-              <div className="flex items-center text-sm">
-                <Calendar className="w-4 h-4 mr-2 text-gray-400" />
-                <span className="text-gray-600">Deadline:</span>
-                <span className="ml-2 font-medium">{formatDate(selectedProject.deadline)}</span>
+        <div className="space-y-4 sm:space-y-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Project Details</h3>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm">
+                <div className="flex items-center mb-1 sm:mb-0">
+                  <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-gray-400 flex-shrink-0" />
+                  <span className="text-gray-600">Deadline:</span>
+                </div>
+                <span className="font-medium sm:ml-2">{formatDate(selectedProject.deadline)}</span>
               </div>
-              <div className="flex items-center text-sm">
-                <Users className="w-4 h-4 mr-2 text-gray-400" />
-                <span className="text-gray-600">Students:</span>
-                <span className="ml-2 font-medium">{selectedProject.students.length}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm">
+                <div className="flex items-center mb-1 sm:mb-0">
+                  <Users className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-gray-400 flex-shrink-0" />
+                  <span className="text-gray-600">Students:</span>
+                </div>
+                <span className="font-medium sm:ml-2">{selectedProject.students.length}</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Student Submissions</h3>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Student Submissions</h3>
             {submissions.length === 0 ? (
-              <p className="text-gray-600 text-center py-4">No submissions yet</p>
+              <p className="text-gray-600 text-center py-3 sm:py-4 text-sm">No submissions yet</p>
             ) : (
               <div className="space-y-3">
                 {submissions.map((submission) => (
-                  <div key={submission._id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                  <div key={submission._id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border border-gray-200 rounded-lg space-y-2 sm:space-y-0">
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{submission.student.name}</p>
                       <p className="text-sm text-gray-600">{submission.originalName}</p>

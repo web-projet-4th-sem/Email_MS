@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { User, Mail, FileText, Camera, Save } from 'lucide-react';
 import { useAuth } from '../../../contexts/AuthContext';
 
@@ -52,52 +52,52 @@ export default function LecturerProfile() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="max-w-4xl mx-auto flex-grow">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Lecturer Profile</h2>
-          <p className="text-gray-600">Manage your profile information and settings</p>
+      <div className="max-w-4xl mx-auto flex-grow px-2 sm:px-0">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Lecturer Profile</h2>
+          <p className="text-sm sm:text-base text-gray-600">Manage your profile information and settings</p>
         </div>
 
         {success && (
-          <div className="mb-6 bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg">
+          <div className="mb-4 sm:mb-6 bg-green-50 border border-green-200 text-green-600 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm">
             {success}
           </div>
         )}
 
         {error && (
-          <div className="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+          <div className="mb-4 sm:mb-6 bg-red-50 border border-red-200 text-red-600 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-sm">
             {error}
           </div>
         )}
 
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
           {/* Profile Header */}
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-8">
-            <div className="flex items-center space-x-6">
-              <div className="relative">
+          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-6 sm:px-6 sm:py-8">
+            <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 sm:items-start">
+              <div className="relative flex-shrink-0">
                 {formData.profilePicture ? (
                   <img
                     src={formData.profilePicture}
                     alt="Profile"
-                    className="w-20 h-20 rounded-full border-4 border-white object-cover"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-white object-cover"
                   />
                 ) : (
-                  <div className="w-20 h-20 bg-white rounded-full border-4 border-white flex items-center justify-center">
-                    <User className="w-10 h-10 text-gray-400" />
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full border-4 border-white flex items-center justify-center">
+                    <User className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400" />
                   </div>
                 )}
                 {isEditing && (
-                  <button className="absolute bottom-0 right-0 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors">
-                    <Camera className="w-4 h-4" />
+                  <button className="absolute bottom-0 right-0 bg-blue-600 text-white p-1.5 sm:p-2 rounded-full hover:bg-blue-700 transition-colors">
+                    <Camera className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 )}
               </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white">{user?.name}</h3>
-                <p className="text-blue-100 capitalize">{user?.role}</p>
-                <div className="flex items-center mt-2 text-blue-100">
-                  <Mail className="w-4 h-4 mr-2" />
-                  {user?.email}
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-xl sm:text-2xl font-bold text-white">{user?.name}</h3>
+                <p className="text-blue-100 capitalize text-sm sm:text-base">{user?.role}</p>
+                <div className="flex items-center justify-center sm:justify-start mt-2 text-blue-100">
+                  <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                  <span className="text-xs sm:text-sm truncate">{user?.email}</span>
                 </div>
               </div>
             </div>
