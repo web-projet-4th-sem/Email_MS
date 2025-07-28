@@ -47,8 +47,6 @@ export default function ProjectList() {
   };
 
   const handleDelete = async (projectId: string) => {
-    /*const confirmed = window.confirm('Are you sure you want to delete this project?');
-    if (!confirmed) return;*/
 
     const result = await Swal.fire({
   title: 'Are you sure?',
