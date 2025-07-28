@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Users, User, Edit, Trash2, Eye } from 'lucide-react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import EditProjectModal from './EditProjectModal';
 
 interface Project {
   _id: string;
@@ -26,6 +27,7 @@ export default function ProjectList() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
 
   useEffect(() => {
     fetchProjects();
@@ -183,7 +185,7 @@ if (!result.isConfirmed) return;
                         <button className="text-blue-600 hover:text-blue-900 transition-colors">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="text-indigo-600 hover:text-indigo-900 transition-colors">
+                        <button className="text-indigo-600 hover:text-indigo-900 transition-colors" onClick={() => setEditingProject(project)} title="Edit Project">
                           <Edit className="w-4 h-4" />
                         </button>
                         <button
@@ -200,6 +202,25 @@ if (!result.isConfirmed) return;
             </table>
           </div>
         </div>
+      )}
+
+      {editingProject && (
+        <EditProjectModal
+          project={editingProject}
+          onClose={() => setEditingProject(null)}
+          onSave={async (updated) => {
+            try {
+              const token = localStorage.getItem('token');
+              await axios.put(`/projects/${updated._id}`, updated, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              setEditingProject(null);
+              fetchProjects();
+            } catch (err) {
+              alert('Failed to update project');
+            }
+          }}
+        />
       )}
 
       <footer className="mt-12 border-t border-gray-200 pt-6 pb-4 text-sm text-gray-500 bg-white">
