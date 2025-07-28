@@ -56,9 +56,9 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
   };
 
   return (
-    <aside className="bg-white w-64 h-full shadow-lg border-r border-gray-200 flex flex-col">
-      <div className="p-4 sm:p-6 flex-1">
-        <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 sm:mb-6">Navigation</h2>
+    <aside className="flex flex-col w-64 h-full bg-white border-r border-gray-200 shadow-lg">
+      <div className="flex-1 p-4 sm:p-6">
+        <h2 className="mb-4 text-base font-semibold text-gray-900 sm:text-lg sm:mb-6"> Quick Navigation</h2>
         <nav className="flex flex-col gap-1 sm:gap-2">
           {menuItems.map((item) => (
             <button
@@ -71,7 +71,7 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
               }`}
             >
               {item.icon}
-              <span className="ml-2 sm:ml-3 font-medium">{item.label}</span>
+              <span className="ml-2 font-medium sm:ml-3">{item.label}</span>
             </button>
           ))}
 
@@ -79,10 +79,10 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
           <div className="relative">
             <button
               onClick={toggleDropdown}
-              className="w-full flex items-center px-3 py-2 sm:px-4 sm:py-3 text-left rounded-lg transition-colors hover:bg-gray-50 text-gray-700 text-sm sm:text-base"
+              className="flex items-center w-full px-3 py-2 text-sm text-left text-gray-700 transition-colors rounded-lg sm:px-4 sm:py-3 hover:bg-gray-50 sm:text-base"
             >
               <Bell className="w-5 h-5" />
-              <span className="ml-2 sm:ml-3 font-medium">Notifications</span>
+              <span className="ml-2 font-medium sm:ml-3">Notifications</span>
               {notificationCount > 0 && (
                 <span className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center">
                   {notificationCount}
@@ -91,9 +91,9 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
             </button>
 
             {dropdownOpen && (
-              <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-64 sm:max-h-80 overflow-y-auto">
+              <div className="absolute left-0 z-50 w-full mt-2 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 sm:max-h-80">
                 {notifications.length === 0 ? (
-                  <p className="p-3 sm:p-4 text-xs sm:text-sm text-gray-500 text-center">No notifications</p>
+                  <p className="p-3 text-xs text-center text-gray-500 sm:p-4 sm:text-sm">No notifications</p>
                 ) : (
                   notifications.map((n) => (
                     <div
@@ -112,7 +112,7 @@ export default function Sidebar({ activeTab, onTabChange, userRole }: SidebarPro
 
                 <button
                   onClick={clearNotifications}
-                  className="w-full text-center text-xs sm:text-sm text-blue-600 hover:underline py-2 bg-gray-50 rounded-b-lg"
+                  className="w-full py-2 text-xs text-center text-blue-600 rounded-b-lg sm:text-sm hover:underline bg-gray-50"
                 >
                   Mark all as read
                 </button>
