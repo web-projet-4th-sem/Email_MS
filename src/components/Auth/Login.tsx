@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { LogIn, Mail, Lock, GraduationCap } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
-
 interface LoginForm {
   email: string;
   password: string;
@@ -18,7 +17,6 @@ export default function Login() {
   const location = useLocation();
   const successMessage = location.state?.successMessage || '';
   
-
   const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();
 
   const onSubmit = async (data: LoginForm) => {

@@ -16,12 +16,9 @@ export default function Register() {
   const { register: registerUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
   const navigate = useNavigate();
-
   const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterForm>();
   const password = watch('password');
-
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
     setError('');
