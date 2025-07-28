@@ -63,7 +63,7 @@ router.get('/', authenticateToken, async (req, res) => {
       query.supervisor = req.user._id;
     }
     
-    // Admin can see all projects (no filter)
+    // Admin can see all projects
     const projects = await Project.find(query)
       .populate('supervisor', 'name email')
       .populate('students', 'name email')
